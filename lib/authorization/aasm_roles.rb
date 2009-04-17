@@ -18,11 +18,11 @@ module Authorization
         aasm_state :deleted, :enter => :do_delete
 
         aasm_event :register do
-          transitions :from => :passive, :to => :pending, :guard => Proc.new {|u| !(u.crypted_password.blank? && u.password.blank?) }
+          transitions :from => :passive, :to => :pending, :guard => Proc.new {|u| !(u.password.blank?) }
         end
         
         aasm_event :activate do
-          transitions :from => :pending, :to => :active 
+          transitions :from => :pending, :to => :active
         end
         
         aasm_event :suspend do
